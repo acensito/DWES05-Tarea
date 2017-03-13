@@ -25,8 +25,11 @@
 //Requermimos el archivo especificado.
 require_once 'funciones.php';
 
+//Obtenemos la ruta del archivo funciones.wdsl independiente de la ruta creada en el servidor
+$uri = str_replace("servicio.php", "funciones.wsdl", filter_input(INPUT_SERVER, 'HTTP_HOST').filter_input(INPUT_SERVER, 'REQUEST_URI'));
+
 //Creamos o instanciamos un nuevo servidor SOAP
-$server = new SoapServer(null, array('uri'=>''));
+$server = new SoapServer(null, array('uri'=>$uri));
 //Indicamos las clases que deben utilizarse en el servidor
 $server->setClass('Funciones');
 //Indicamos que maneje las peticiones SOAP

@@ -20,8 +20,8 @@
  */
 
 //Generamos las rutas del archivo de servicio y del espacio de nombres
-$url = str_replace("cliente", "servicio", "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
-$uri = str_replace("/cliente.php", "", "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
+$url = str_replace("cliente", "servicio", "http://".filter_input(INPUT_SERVER, 'HTTP_HOST').filter_input(INPUT_SERVER, 'REQUEST_URI'));
+$uri = str_replace("/cliente.php", "", "http://".filter_input(INPUT_SERVER, 'HTTP_HOST').filter_input(INPUT_SERVER, 'REQUEST_URI'));
 
 //Creamos el cliente SOAP
 $cliente = new SoapClient(null, array('location'=>$url, 'uri'=>$uri));
@@ -85,7 +85,7 @@ $cliente = new SoapClient(null, array('location'=>$url, 'uri'=>$uri));
     
     <h2>Consulta de participación:</h2>
     <form action="cliente.php" method="POST">
-        <input placeholder="Introduzca un usuario "type="text" name="campoLogin" value="" required />
+        <input placeholder="Introduzca un usuario" type="text" name="campoLogin" value="" required />
         <input type="submit" value="Consulta Participación" name="enviar" />
     </form> 
     <?php
@@ -106,7 +106,7 @@ $cliente = new SoapClient(null, array('location'=>$url, 'uri'=>$uri));
             echo '</table>';
         } else {
             //En el caso de no existir el usuario, se muestra mensaje feedback
-            echo "<p>El usuario especificado no existe en la BD</p>";
+            echo '<p>El usuario '.$login.' no existe en la BD</p>';
         }
     }
     ?>

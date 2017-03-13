@@ -26,9 +26,9 @@
 require 'funciones.php';
 require 'WSDLDocument.php';
 
-//Obtenemos las rutas del archivo del servicio y del espacio de nombres
-$url = str_replace("generaWSDL", "servicio", $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
-$uri = str_replace("/generaWSDL.php", "", $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
+//Obtenemos las rutas del archivo del servicio y del espacio de nombres 
+$url = str_replace("generaWSDL", "servicio", filter_input(INPUT_SERVER, 'HTTP_HOST').filter_input(INPUT_SERVER, 'REQUEST_URI'));
+$uri = str_replace("/generaWSDL.php", "", filter_input(INPUT_SERVER, 'HTTP_HOST').filter_input(INPUT_SERVER, 'REQUEST_URI'));
 
 //Llamamos al documento y especificamos las clases a utilizar
 $wsdl = new WSDLDocument('Funciones', $url, $uri);

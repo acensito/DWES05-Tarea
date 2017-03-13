@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap-env="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="192.168.0.250/DWES05-Tarea" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="192.168.0.250/DWES05-Tarea">
+    <wsdl:types>
+        <xsd:schema targetNamespace="192.168.0.250/DWES05-Tarea"/>
+    </wsdl:types>
+    <wsdl:message name="getForerosRequest"/>
+    <wsdl:message name="getForerosResponse">
+        <wsdl:part name="getForerosReturn" type="soap-enc:array"/>
+    </wsdl:message>
+    <wsdl:message name="getMensajesPublicosRequest"/>
+    <wsdl:message name="getMensajesPublicosResponse">
+        <wsdl:part name="getMensajesPublicosReturn" type="soap-enc:array"/>
+    </wsdl:message>
+    <wsdl:message name="getParticipacionForerosRequest">
+        <wsdl:part name="login" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="getParticipacionForerosResponse">
+        <wsdl:part name="getParticipacionForerosReturn" type="soap-enc:array"/>
+    </wsdl:message>
+    <wsdl:portType name="FuncionesPortType">
+        <wsdl:operation name="getForeros">
+            <wsdl:documentation>Clase getForeros que devuelve un array con el listado de logins y mails y en el caso de no existir, el booleano false.</wsdl:documentation>
+            <wsdl:input message="tns:getForerosRequest"/>
+            <wsdl:output message="tns:getForerosResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getMensajesPublicos">
+            <wsdl:documentation>Metodo getMensajesPublicos que recopila y devuelve un array de mensajes de tipo publico y sus fechas de publicación. En el caso de no existir resultados devolverá un booleano false.</wsdl:documentation>
+            <wsdl:input message="tns:getMensajesPublicosRequest"/>
+            <wsdl:output message="tns:getMensajesPublicosResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getParticipacionForeros">
+            <wsdl:documentation>Metodo getParticipacionForeros que recopila la suma de mensajes de tipo privado y públicos que ha realizado un usuario enviado por parametros. En el caso de no existir el usuario devolverá un booleano false.</wsdl:documentation>
+            <wsdl:input message="tns:getParticipacionForerosRequest"/>
+            <wsdl:output message="tns:getParticipacionForerosResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="FuncionesBinding" type="tns:FuncionesPortType">
+        <soap-env:binding xmlns="http://schemas.xmlsoap.org/wsdl/soap/" style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="getForeros">
+            <soap-env:operation xmlns="http://schemas.xmlsoap.org/wsdl/soap/" soapAction="192.168.0.250/DWES05-Tarea/servicio.php?method=getForeros" style="rpc"/>
+            <wsdl:input>
+                <soap-env:body xmlns="http://schemas.xmlsoap.org/wsdl/soap/" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap-env:body xmlns="http://schemas.xmlsoap.org/wsdl/soap/" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getMensajesPublicos">
+            <soap-env:operation xmlns="http://schemas.xmlsoap.org/wsdl/soap/" soapAction="192.168.0.250/DWES05-Tarea/servicio.php?method=getMensajesPublicos" style="rpc"/>
+            <wsdl:input>
+                <soap-env:body xmlns="http://schemas.xmlsoap.org/wsdl/soap/" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap-env:body xmlns="http://schemas.xmlsoap.org/wsdl/soap/" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getParticipacionForeros">
+            <soap-env:operation xmlns="http://schemas.xmlsoap.org/wsdl/soap/" soapAction="192.168.0.250/DWES05-Tarea/servicio.php?method=getParticipacionForeros" style="rpc"/>
+            <wsdl:input>
+                <soap-env:body xmlns="http://schemas.xmlsoap.org/wsdl/soap/" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap-env:body xmlns="http://schemas.xmlsoap.org/wsdl/soap/" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="Funciones">
+        <wsdl:documentation>Clase Funciones. Recopila todas las funciones del servicio web.</wsdl:documentation>
+        <wsdl:port name="FuncionesPort" binding="tns:FuncionesBinding">
+            <soap-env:address location="192.168.0.250/DWES05-Tarea/servicio.php"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
