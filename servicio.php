@@ -19,10 +19,17 @@
  * Alumno: Felipe Rodríguez Gutiérrez
  */
 
+/**
+ * Montando el servicio web
+ */
+//Requermimos el archivo especificado.
 require_once 'funciones.php';
 
+//Creamos o instanciamos un nuevo servidor SOAP
 $server = new SoapServer(null, array('uri'=>''));
+//Indicamos las clases que deben utilizarse en el servidor
 $server->setClass('Funciones');
+//Indicamos que maneje las peticiones SOAP
 $server->handle();
 
 

@@ -16,6 +16,7 @@ body {
 }
 
 footer {
+    margin-top: 1em;
     font-size: 0.8em;
     text-align: center;
 }
@@ -28,7 +29,7 @@ p {
 h1 {
     text-align: center;
 }
-
+/* Estilos de la tabla */
 table {
     width: 100%;
     border:1px solid #545454;
@@ -66,6 +67,16 @@ th, td {
     padding: 3px
 }
 
+/* Estilos del formulario */
+form {
+    margin-bottom: 1em;
+}
+
+input[type=text] {
+    width: 200px;
+}
+
+/* Estilos de texto */
 .centro {
     text-align: center;
 }
